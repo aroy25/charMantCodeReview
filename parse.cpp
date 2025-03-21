@@ -27,4 +27,27 @@ bool characteristic(const char numString[], int& c)
     return true;
 }
 //writing som test code to make sure the function works
-void testChar(const)
+void testChar(const char* input)
+{
+    int c;
+    bool result = characteristic(input, c);
+    cout << "Input: \"" << input << "\" -> ";
+    if (result)
+    {
+        cout << "Characteristic: " << c << endl;
+    }
+    else
+    {
+        cout << "Invalid input" << endl;
+    }
+}
+
+int main()
+{
+    testChar("  123");
+    testChar("-456");
+    testChar("+777");
+    testChar("  123 456");
+    testChar("0");
+    testChar("   -0");
+}
