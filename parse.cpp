@@ -15,5 +15,16 @@ bool characteristic(const char numString[], int& c)
         i++;
     }
     //make sure the first character is a digit
-    
+    if (numString[i] < '0' || numString[i] > '9') return false;
+
+    c = 0;
+    while (numString[i] >= '0' && numString[i] <= '9')
+    {
+        c = c * 10 + (numString[i] - '0');
+        i++;
+    }
+    c *= sign;
+    return true;
 }
+//writing som test code to make sure the function works
+void testChar(const)
