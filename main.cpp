@@ -99,10 +99,25 @@ bool characteristic(const char numString[], int& c)
 //--
 bool mantissa(const char numString[], int& numerator, int& denominator)
 {
-    //hard coded return value to make the main() work
+    int i = 0;
+    while(numString[i] == ' ') i++; //skip the beginning spaces if any
+    if (numString[i] == '-' || numString[i] == '+') i++; //skip the sign if any
+    while(numString[i] >= '0' && numString[i] <= '9') i++; 
+
     numerator = 456;
     denominator = 1000;
-    return true;
+
+    if(numString[i] == '.')
+    {
+        i++;
+        if(numString[i] < '0' || numString[i] > '9') return false;
+        while (numString[i] >= '0' && numString[i] <= '9') 
+        {
+            numerator = numerator * 10 + (numString[i] - '0');
+            denominator *= 10;
+            i++;
+        }
+    }
 }
 //--
 bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
