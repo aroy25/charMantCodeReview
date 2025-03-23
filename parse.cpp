@@ -6,7 +6,7 @@ using namespace std;
 bool characteristic(const char numString[], int& c) 
 {
     int i = 0;
-    while (numString[i] == ' ') i++; // skip first spaces
+    while (numString[i] == ' ') i++; // skip  spaces
 
     int sign = 1;
     if(numString[i] == '-' || numString[i] == '+') 
@@ -25,4 +25,27 @@ bool characteristic(const char numString[], int& c)
     }
     c *= sign;
     return true;
+}
+//start of the mantissa function to extract the numerator and denominator
+bool mantissa(const char numString[], int& numerator, int& denominator)
+{
+    int i = 0;
+    while(numString[i] == ' ') i++; //skip the beginning spaces if any
+    if (numString[i] == '-' || numString[i] == '+') i++; //skip the sign if any
+    while(numString[i] >= '0' && numString[i] <= '9') i++; 
+
+    numerator = 456;
+    denominator = 1000;
+
+    if(numString[i] == '.')
+    {
+        i++;
+        if(numString[i] < '0' || numString[i] > '9') return false;
+        while (numString[i] >= '0' && numString[i] <= '9') 
+        {
+            numerator = numerator * 10 + (numString[i] - '0');
+            denominator *= 10;
+            i++;
+        }
+    }
 }
