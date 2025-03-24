@@ -127,8 +127,14 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 //--
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
-    //hard coded return value to make the code compile
-    //you will have to come up with an algorithm to multiply the two numbers
+    int n1_improper = improperFraction(c1, n1, d1);
+    int n2_improper = improperFraction(c2, n2, d2);
+    
+    int n3 = n1_improper * n2_improper;
+    int d3 = d1 * d2;
+    
+    getResult(n3, d3, result, len);
+    
     return true;
 }
 //--
