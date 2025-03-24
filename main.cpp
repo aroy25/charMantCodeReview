@@ -111,8 +111,17 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 //--
 bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
-    //hard coded return value to make the code compile
-    //you will have to come up with an algorithm to subtract the two numbers
+    int n1_improper = improperFraction(c1, n1, d1);
+    int n2_improper = improperFraction(c2, n2, d2);
+    
+    int commonDen = 0;
+    
+    commonDenom(n1_improper, d1, n2_improper, d2, commonDen);
+    
+    int n3 = n1_improper - n2_improper;
+    
+    getResult(n3, commonDen, result, len);
+    
     return true;
 }
 //--
