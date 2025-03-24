@@ -14,6 +14,7 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 
 int improperFraction(int& num, int& den);
 void commonDenom(int& c1, int& n1, int& d1, int& c2, int& n2, int& d2);
+void getResult(int& num, int& den, char* result, int& len);
 
 int main()
 {
@@ -150,4 +151,34 @@ void commonDenom(int& n1, int& d1, int& n2, int& d2)
     
     d1 *= d2;
     d2 *= d1;
+}
+//--
+void getResult(int& num, int& den, char* result, int& len)
+{
+    int charNum = num / den;
+    int index = 0;
+    
+    convertIntToChar(charNum, index, result, len);
+    
+    result[index] = '.';
+    index++;
+    
+    cout << den << endl;
+    int remain = num % den;
+    //int remainCopy = remain;
+    
+    if (remain != 0)
+    {
+        //Check math here
+        while (remain != 0 && index < (len))
+        {
+            charNum = (remain * 10) / den;
+            remain = (remain * 10) % den;
+            convertIntToChar(charNum, index, result, len);
+            
+            cout << remain << endl;
+        }
+    }
+    
+    result[index] = '\0';
 }
