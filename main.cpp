@@ -16,6 +16,7 @@ int improperFraction(int& num, int& den);
 void commonDenom(int& c1, int& n1, int& d1, int& c2, int& n2, int& d2);
 void getResult(int& num, int& den, char* result, int& len);
 void convertIntToChar(int& num, int& index, char* resultArr, int& len);
+void inverseFraction (int& num, int& den);
 
 int main()
 {
@@ -229,4 +230,11 @@ void convertIntToChar(int& num, int& index, char* resultArr, int& len)
         resultArr[index] = numChar[j];
         index++;
     }
+}
+//--
+void inverseFraction (int& num, int& den)
+{
+    int num2 = num;
+    num = den;
+    den = num2;
 }
