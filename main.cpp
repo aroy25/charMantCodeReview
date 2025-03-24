@@ -147,11 +147,12 @@ int improperFraction(int& charNum, int& num, int& den)
 //--
 void commonDenom(int& n1, int& d1, int& n2, int& d2)
 {
+    commonDen = d1 * d2;
+    
     n1 *= d2;
     n2 *= d1;
     
-    d1 *= d2;
-    d2 *= d1;
+    d1 = d2 = commonDen;
 }
 //--
 void getResult(int& num, int& den, char* result, int& len)
