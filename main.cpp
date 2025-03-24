@@ -15,6 +15,7 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 int improperFraction(int& num, int& den);
 void commonDenom(int& c1, int& n1, int& d1, int& c2, int& n2, int& d2);
 void getResult(int& num, int& den, char* result, int& len);
+void convertIntToChar(int& num, int& index, char* resultArr, int& len);
 
 int main()
 {
@@ -181,4 +182,31 @@ void getResult(int& num, int& den, char* result, int& len)
     }
     
     result[index] = '\0';
+}
+//--
+void convertIntToChar(int& num, int& index, char* resultArr, int& len)
+{
+    char numChar[len];
+    int numCharIndex = 0;
+    
+    if (num == 0)
+    {
+        resultArr[index] = '0';
+        index++;
+        return;
+    }
+    
+    while (num > 0)
+    {
+        numChar[numCharIndex] = '0' + (num % 10);
+        num /= 10;
+        numCharIndex++;
+    }
+    
+    // Length of array check
+    for (int j = numCharIndex-1; j >= 0; j--)
+    {
+        resultArr[index] = numChar[j];
+        index++;
+    }
 }
