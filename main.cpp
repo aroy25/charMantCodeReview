@@ -104,6 +104,7 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
     if (numString[i] == '-' || numString[i] == '+') i++; //skip the sign if any
     while(numString[i] >= '0' && numString[i] <= '9') i++; 
 
+    //hard coded return values to make the main work
     numerator = 456;
     denominator = 1000;
 
