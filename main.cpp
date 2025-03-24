@@ -170,7 +170,7 @@ void getResult(int& num, int& den, char* result, int& len)
     if (remain != 0)
     {
         //Check math here
-        while (remain != 0 && index < (len))
+        while (remain != 0 && index < (len-1))
         {
             charNum = (remain * 10) / den;
             remain = (remain * 10) % den;
