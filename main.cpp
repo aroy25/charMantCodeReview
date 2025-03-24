@@ -95,19 +95,17 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
 //--
 bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
-    //you will have to come up with an algorithm to add the two numbers
-    //hard coded return value to make the main() work
-    result[0] = '4';
-    result[1] = '.';
-    result[2] = '1';
-    result[3] = '6';
-    result[4] = '6';
-    result[5] = '6';
-    result[6] = '6';
-    result[7] = '6';
-    result[8] = '6';
-    result[9] = '\0';
-
+    int n1_improper = improperFraction(c1, n1, d1);
+    int n2_improper = improperFraction(c2, n2, d2);
+    
+    int commonDen = 0;
+    
+    commonDenom(n1_improper, d1, n2_improper, d2, commonDen);
+    
+    int n3 = n1_improper + n2_improper;
+    
+    getResult(n3, commonDen, result, len);
+    
     return true;
 }
 //--
