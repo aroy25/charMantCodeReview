@@ -195,6 +195,12 @@ void convertIntToChar(int& num, int& index, char* resultArr, int& len)
         index++;
         return;
     }
+    else if (num < 0)
+    {
+        resultArr[index] = '-';
+        num *= -1;
+        index++;
+    }
     
     while (num > 0)
     {
