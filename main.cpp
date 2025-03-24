@@ -12,6 +12,9 @@ bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 
+int improperFraction(int& num, int& den);
+void commonDenom(int& c1, int& n1, int& d1, int& c2, int& n2, int& d2);
+
 int main()
 {
     //this c-string, or array of 8 characters, ends with the null terminating character '\0'
@@ -133,4 +136,18 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
     result[6] = '\0';
     
     return true;
+}
+//--
+int improperFraction(int& charNum, int& num, int& den)
+{
+    return num = (charNum * den) + num;
+}
+//--
+void commonDenom(int& n1, int& d1, int& n2, int& d2)
+{
+    n1 *= d2;
+    n2 *= d1;
+    
+    d1 *= d2;
+    d2 *= d1;
 }
