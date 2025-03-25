@@ -87,7 +87,7 @@ bool characteristic(const char numString[], int& c)
     //make sure the first character is a digit
     if (numString[i] < '0' || numString[i] > '9') return false;
 
-    c = 123;
+    c = 0;
     while (numString[i] >= '0' && numString[i] <= '9')
     {
         c = c * 10 + (numString[i] - '0');
@@ -104,9 +104,8 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
     if (numString[i] == '-' || numString[i] == '+') i++; //skip the sign if any
     while(numString[i] >= '0' && numString[i] <= '9') i++; 
 
-    //hard coded return values to make the main work
-    numerator = 456;
-    denominator = 1000;
+    numerator = 0;
+    denominator = 1;
 
     if(numString[i] == '.')
     {
