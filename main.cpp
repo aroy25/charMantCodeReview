@@ -72,29 +72,30 @@ int main()
 
     return 0;
 } 
-// Added in the characteristc function from my parse.cpp // test area
+// Added in the characteristc function from my parse.cpp // parse.cpp was my test area
 bool characteristic(const char numString[], int& c) 
 {
     int i = 0;
     while (numString[i] == ' ') i++; // skip first spaces if any
 
     int sign = 1;
-    if(numString[i] == '-' || numString[i] == '+') 
+    // start with checking for a sign's that could be there 
+    if(numString[i] == '-' || numString[i] == '+')
     {
-        if(numString[i] == '-') sign = -1;
-        i++;
+        if(numString[i] == '-') sign = -1; 
+        i++; 
     }
-    //make sure the first character is a digit
+    //make sure the a character that shows is a digit
     if (numString[i] < '0' || numString[i] > '9') return false;
 
     c = 0;
-    while (numString[i] >= '0' && numString[i] <= '9')
+    while (numString[i] >= '0' && numString[i] <= '9') // Convert that num characters to an int value
     {
-        c = c * 10 + (numString[i] - '0');
+        c = c * 10 + (numString[i] - '0'); 
         i++;
     }
     c *= sign;
-    return true;
+    return true; // Return true since a valid char was there
 }
 //--
 bool mantissa(const char numString[], int& numerator, int& denominator)
