@@ -226,44 +226,36 @@ bool arithmeticOperation (int c1, int n1, int d1, int c2, int n2, int d2, char r
     
     bool retVal = false;
     
-    if (symbol == '+')
+    if (symbol == '+' || symbol == '-')
     {
         int commonDen = 0;
-        commonDenom(n1_improper, d1, n2_improper, d2, commonDen);
+        getCommonDenom(n1_improper, d1, n2_improper, d2, commonDen);
         
-        int n3 = n1_improper + n2_improper;
+        int n3;
+        
+        if (symbol == '+')
+        {
+            n3 = n1_improper + n2_improper;
+        }
+        else
+        {
+            n3 = n1_improper - n2_improper;
+        }
+        
         getResult(n3, commonDen, result, len);
-        
         retVal = true;
     }
-    else if (symbol == '-')
+    else if (symbol == '*' || symbol == '/')
     {
-        int commonDen = 0;
-        commonDenom(n1_improper, d1, n2_improper, d2, commonDen);
-        
-        int n3 = n1_improper - n2_improper;
-        getResult(n3, commonDen, result, len);
-        
-        retVal = true;
-    }
-    else if (symbol == '*')
-    {
-        int n3 = n1_improper * n2_improper;
-        int d3 = d1 * d2;
-        
-        getResult(n3, d3, result, len);
-        
-        retVal = true;
-    }
-    else if (symbol == '/')
-    {
-        inverseFraction(n2_improper, d2);
+        if (symbol == '/')
+        {
+            inverseFraction(n2_improper, d2);
+        }
         
         int n3 = n1_improper * n2_improper;
         int d3 = d1 * d2;
         
         getResult(n3, d3, result, len);
-        
         retVal = true;
     }
     else
