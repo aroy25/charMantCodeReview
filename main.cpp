@@ -5,18 +5,20 @@ using namespace std;
 bool characteristic(const char numString[], int& c);
 bool mantissa(const char numString[], int& numerator, int& denominator);
 
+//operator functions
 bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
-
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
 
+//helper functions
 int improperFraction(int& charNum, int& num, int& den);
-void commonDenom(int& n1, int& d1, int& n2, int& d2, int& commonDen);
+void getCommonDenom(int& n1, int& d1, int& n2, int& d2, int& commonDen);
 void getResult(int& num, int& den, char* result, int& len);
 void convertIntToChar(int& num, int& index, char* resultArr, int& len);
 void inverseFraction (int& num, int& den);
 
+//master operator functions
 bool arithmeticOperation (int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len, char symbol);
 
 int main()
@@ -46,12 +48,12 @@ int main()
     int c2, n2, d2;
 
     //initialize the values
-    c1 = 23;
-    n1 = 3;
+    c1 = 24;
+    n1 = 0;
     d1 = 5;
 
     c2 = 2;
-    n2 = 7;
+    n2 = 0;
     d2 = 4;
 
     //if the c-string can hold at least the characteristic
@@ -117,90 +119,117 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
     return true;
 }
 //--
+//-------------------------------------------------
+//Each operator function returns the result of the
+//helper function based on which function is called
+//-------------------------------------------------
+//
 bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
+    //'+' confirms this is addition
     return arithmeticOperation(c1, n1, d1, c2, n2, d2, result, len, '+');
 }
 //--
 bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
+    //'-' confirms this is subtraction
     return arithmeticOperation(c1, n1, d1, c2, n2, d2, result, len, '-');
 }
 //--
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
+    //'*' confirms this is multiplication
     return arithmeticOperation(c1, n1, d1, c2, n2, d2, result, len, '*');
 }
 //--
 bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
+    //'/' confirms this is division
     return arithmeticOperation(c1, n1, d1, c2, n2, d2, result, len, '/');
 }
 //--
 int improperFraction(int& charNum, int& num, int& den)
 {
+    //ex: 2 3/4 -> num = (2 * 4) + 3;
     return num = (charNum * den) + num;
 }
 //--
-void commonDenom(int& n1, int& d1, int& n2, int& d2, int& commonDen)
+void getCommonDenom(int& n1, int& d1, int& n2, int& d2, int& commonDen)
 {
+    //establishes common denominator
     commonDen = d1 * d2;
     
+    //updates numerator
     n1 *= d2;
     n2 *= d1;
     
+    //updates denominator to all match
     d1 = d2 = commonDen;
 }
 //--
 void getResult(int& num, int& den, char* result, int& len)
 {
+    //get characteristic number
     int charNum = num / den;
+    //establish index
     int index = 0;
     
+    //converts charactistic number into character
     convertIntToChar(charNum, index, result, len);
     
-    result[index] = '.';
-    index++;
-    
+    //gets the mantissa
     int remain = num % den;
-    //int remainCopy = remain;
     
     if (remain != 0)
     {
-        //Check math here
+        //inserts decimal into array, incremates by one
+        result[index] = '.';
+        index++;
+        
+        //while the remainder is NOT zero and the index is not at the edge
         while (remain != 0 && index < (len-1))
         {
+            //get new characteristic number
             charNum = (remain * 10) / den;
+            //get new remainder
             remain = (remain * 10) % den;
+            //insert characteristic into array
             convertIntToChar(charNum, index, result, len);
         }
     }
     
+    //Adds terminating character into array
     result[index] = '\0';
 }
 //--
 void convertIntToChar(int& num, int& index, char* resultArr, int& len)
 {
+    //creates temporary array and establishes index
     char numChar[len];
     int numCharIndex = 0;
     
-    if (num == 0)
-    {
-        resultArr[index] = '0';
-        index++;
-        return;
-    }
-    else if (num < 0)
+    //checks for negative numbers and/or if the number is 0
+    if (num < 0)
     {
         resultArr[index] = '-';
         num *= -1;
         index++;
     }
+    else if (num == 0)
+    {
+        resultArr[index] = '0';
+        index++;
+        return;
+    }
     
+    //as long as the number is not zero
     while (num > 0)
     {
+        //inserts number into array
         numChar[numCharIndex] = '0' + (num % 10);
+        //gets rid of digit inserted
         num /= 10;
+        //incremates through array
         numCharIndex++;
     }
     
@@ -214,6 +243,7 @@ void convertIntToChar(int& num, int& index, char* resultArr, int& len)
 //--
 void inverseFraction (int& num, int& den)
 {
+    //Creates holder value for num, then sets num and den equal to each other
     int num2 = num;
     num = den;
     den = num2;
@@ -221,18 +251,23 @@ void inverseFraction (int& num, int& den)
 
 bool arithmeticOperation (int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len, char symbol)
 {
+    //gets numerator of improper fractions
     int n1_improper = improperFraction(c1, n1, d1);
     int n2_improper = improperFraction(c2, n2, d2);
     
+    //assumes false;
     bool retVal = false;
     
     if (symbol == '+' || symbol == '-')
     {
+        //Establishes common denominator and matches the numerators
         int commonDen = 0;
         getCommonDenom(n1_improper, d1, n2_improper, d2, commonDen);
         
+        //establishes variable for total of numerators
         int n3;
         
+        //equation depending on operator
         if (symbol == '+')
         {
             n3 = n1_improper + n2_improper;
@@ -242,26 +277,27 @@ bool arithmeticOperation (int c1, int n1, int d1, int c2, int n2, int d2, char r
             n3 = n1_improper - n2_improper;
         }
         
+        //get result and set retval as true
         getResult(n3, commonDen, result, len);
         retVal = true;
     }
     else if (symbol == '*' || symbol == '/')
     {
+        //if division, inverse the function
         if (symbol == '/')
         {
             inverseFraction(n2_improper, d2);
         }
         
+        //math for total numerator and denominator
         int n3 = n1_improper * n2_improper;
         int d3 = d1 * d2;
         
+        //get result and set retval as true
         getResult(n3, d3, result, len);
         retVal = true;
     }
-    else
-    {
-        retVal = false;
-    }
     
+    //returns the retval
     return retVal;
 }
