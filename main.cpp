@@ -72,7 +72,7 @@ int main()
 
     return 0;
 } 
-// Added in the characteristc function from my parse.cpp // parse.cpp was my test area
+// Added in the characteristc function from my parse.cpp // parse.cpp was my test area// complete
 bool characteristic(const char numString[], int& c) 
 {
     int i = 0;
