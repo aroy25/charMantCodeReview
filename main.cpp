@@ -48,11 +48,11 @@ int main()
     int c2, n2, d2;
 
     //initialize the values
-    c1 = 24;
+    c1 = 2423;
     n1 = 0;
     d1 = 5;
 
-    c2 = 2;
+    c2 = 282;
     n2 = 0;
     d2 = 4;
 
@@ -147,7 +147,9 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
     //'/' confirms this is division
     return arithmeticOperation(c1, n1, d1, c2, n2, d2, result, len, '/');
 }
-//--
+//-----------------
+// Helper Functions
+//-----------------
 int improperFraction(int& charNum, int& num, int& den)
 {
     //ex: 2 3/4 -> num = (2 * 4) + 3;
@@ -180,7 +182,7 @@ void getResult(int& num, int& den, char* result, int& len)
     //gets the mantissa
     int remain = num % den;
     
-    if (remain != 0)
+    if (remain != 0 && index < (len-1))
     {
         //inserts decimal into array, incremates by one
         result[index] = '.';
@@ -204,40 +206,44 @@ void getResult(int& num, int& den, char* result, int& len)
 //--
 void convertIntToChar(int& num, int& index, char* resultArr, int& len)
 {
-    //creates temporary array and establishes index
-    char numChar[len];
-    int numCharIndex = 0;
-    
-    //checks for negative numbers and/or if the number is 0
-    if (num < 0)
+    if (index < (len-1))
     {
-        resultArr[index] = '-';
-        num *= -1;
-        index++;
-    }
-    else if (num == 0)
-    {
-        resultArr[index] = '0';
-        index++;
-        return;
-    }
-    
-    //as long as the number is not zero
-    while (num > 0)
-    {
-        //inserts number into array
-        numChar[numCharIndex] = '0' + (num % 10);
-        //gets rid of digit inserted
-        num /= 10;
-        //incremates through array
-        numCharIndex++;
-    }
-    
-    // Length of array check
-    for (int j = numCharIndex-1; j >= 0; j--)
-    {
-        resultArr[index] = numChar[j];
-        index++;
+        //creates temporary array and establishes index
+        char numChar[len];
+        int numCharIndex = 0;
+        
+        //checks for negative numbers and/or if the number is 0
+        if (num < 0)
+        {
+            resultArr[index] = '-';
+            num *= -1;
+            index++;
+        }
+        else if (num == 0)
+        {
+            resultArr[index] = '0';
+            index++;
+            return;
+        }
+        
+        //as long as the number is not zero
+        while (num > 0)
+        {
+            //inserts number into array
+            numChar[numCharIndex] = '0' + (num % 10);
+            //gets rid of digit inserted
+            num /= 10;
+            //incremates through array
+            numCharIndex++;
+        }
+        
+        //Length of array check
+        //make sure this doesn't go to far
+        for (int j = numCharIndex-1; j >= 0; j--)
+        {
+            resultArr[index] = numChar[j];
+            index++;
+        }
     }
 }
 //--
@@ -248,7 +254,9 @@ void inverseFraction (int& num, int& den)
     num = den;
     den = num2;
 }
-
+//--------------------
+//Main Helper Function
+//--------------------
 bool arithmeticOperation (int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len, char symbol)
 {
     //gets numerator of improper fractions
