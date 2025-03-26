@@ -103,6 +103,9 @@ int main()
 
     return 0;
 
+} 
+// Added in the characteristc function from my parse.cpp // parse.cpp was my test area// complete updated
+bool characteristic(const char numString[], int& c) 
 {
     int i = 0;
     while (numString[i] == ' ') i++; // skip first spaces if any
