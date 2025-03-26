@@ -102,20 +102,52 @@ int main()
     }
 
     return 0;
-}
-//--
-bool characteristic(const char numString[], int& c)
+
 {
-    //hard coded return value to make the main() work
-    c = 123;
-    return true;
+    int i = 0;
+    while (numString[i] == ' ') i++; // skip first spaces if any
+
+    int sign = 1;
+    // start with checking for a sign's that could be there 
+    if(numString[i] == '-' || numString[i] == '+')
+    {
+        if(numString[i] == '-') sign = -1; 
+        i++; 
+    }
+    //make sure the a character that shows is a digit
+    if (numString[i] < '0' || numString[i] > '9') return false;
+
+    c = 0;
+    while (numString[i] >= '0' && numString[i] <= '9') // Convert that num characters to an int value
+    {
+        c = c * 10 + (numString[i] - '0'); 
+        i++;
+    }
+    c *= sign;
+    return true; // Return true since a valid char was there
 }
 //--
 bool mantissa(const char numString[], int& numerator, int& denominator)
 {
-    //hard coded return value to make the main() work
-    numerator = 456;
-    denominator = 1000;
+    int i = 0;
+    while(numString[i] == ' ') i++; //skip the beginning spaces if any
+    if (numString[i] == '-' || numString[i] == '+') i++; //skip the sign if any
+    while(numString[i] >= '0' && numString[i] <= '9') i++; 
+
+    numerator = 0;
+    denominator = 1;
+
+    if(numString[i] == '.')
+    {
+        i++;
+        if(numString[i] < '0' || numString[i] > '9') return false;
+        while (numString[i] >= '0' && numString[i] <= '9') 
+        {
+            numerator = numerator * 10 + (numString[i] - '0');
+            denominator *= 10;
+            i++;
+        }
+    }
     return true;
 }
 //--
