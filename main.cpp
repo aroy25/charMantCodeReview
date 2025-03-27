@@ -134,7 +134,7 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
 {
     int i = 0;
     while(numString[i] == ' ') i++; //skip the beginning spaces if any
-    if (numString[i] == '-' || numString[i] == '+') i++; //skip the sign if any
+    if (numString[i] == '-' || numString[i] == '+') i++; //check for signs 
     while(numString[i] >= '0' && numString[i] <= '9') i++; 
 
     numerator = 0;
